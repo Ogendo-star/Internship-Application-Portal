@@ -1,17 +1,13 @@
-import './App.css'
-import DashBoard from './DashBoard'
+import React from 'react';
+import FormStatus from './components/FormStatus';  // Add this import
+import './App.css';
 
 function App() {
-  
-
   return (
-    <>
-      <div>
-        <DashBoard/>
-      </div>
-      
-    </>
-  )
+    <div className="App">
+      <FormStatus />  {/* Add this to render the FormStatus component */}
+    </div>
+  );
 }
 
-export default App
+export default App;
