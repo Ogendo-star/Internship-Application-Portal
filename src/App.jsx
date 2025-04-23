@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import './App.css'
+import DashBoard from './DashBoard'
 
 function App() {
   
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div>
-        
+        <DashBoard/>
       </div>
       
     </>
