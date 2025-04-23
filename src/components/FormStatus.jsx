@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 function FormStatus() {
-  const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [description, setDescription] = useState('');
   const [skills, setSkills] = useState([]);
   const [cvUploaded, setCvUploaded] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [portfolioUrl, setPortfolioUrl] = useState('');
   const [status, setStatus] = useState('');
 
   const requiredSkills = ['JavaScript', 'React'];
@@ -39,11 +40,6 @@ function FormStatus() {
       <h1>Internship Application Form</h1>
 
       <label>
-        Full Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </label>
-
-      <label>
         Age (18+):
         <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
       </label>
@@ -60,6 +56,16 @@ function FormStatus() {
         <label><input type="checkbox" value="HTML" onChange={handleSkillChange} /> HTML</label>
         <label><input type="checkbox" value="CSS" onChange={handleSkillChange} /> CSS</label>
       </fieldset>
+
+      <label>
+        Phone Number:
+        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+      </label>
+
+      <label>
+        Portfolio URL:
+        <input type="url" value={portfolioUrl} onChange={(e) => setPortfolioUrl(e.target.value)} />
+      </label>
 
       <label>
         Upload CV:
