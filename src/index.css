@@ -1,6 +1,38 @@
-@import "tailwindcss";
-.poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.form-status {
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.status-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.status-message {
+  color: #555;
+}
+
+.accepted {
+  color: green;
+}
+
+.rejected {
+  color: red;
+}
+
+.pending {
+  color: yellow;
+}
