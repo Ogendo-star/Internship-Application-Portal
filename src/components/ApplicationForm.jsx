@@ -39,10 +39,22 @@ const generateYears = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user); 
+
+
+    fetch('http://localhost:3001/internships', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data) 
+       console.log(user); 
     
     //clear/rest the form
-    setUser({
+setUser({
       firstName: '',
       middleName: '',
       lastName: '',
@@ -55,8 +67,9 @@ const generateYears = () => {
       address: '',
       gender: ''
     });
-  };
-
+        })
+    
+}
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
