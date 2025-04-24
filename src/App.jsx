@@ -15,9 +15,6 @@ const App = () => {
   return (
     <>
     <div className='container'>
-      <div className='dashboard'>
-    <DashBoard/>
-    </div>
     <div className="main bg-gray-100 p-6 space-y-6">
       <h1 className="text-3xl font-bold text-center text-blue-800">Available Internships</h1>
       <div className="mx-auto">
