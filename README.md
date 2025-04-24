@@ -1,12 +1,141 @@
-# React + Vite
+# 🎓 Internship Application Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+-The Internship Application Portal is a responsive and user-friendly web application that streamlines the internship application process for both applicants and organizations. Built using modern web technologies, it offers a clean interface for submission, status tracking, and filtering of applications.
 
-Currently, two official plugins are available:
+## 📊 Project Status
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ Navbar
 
-## Expanding the ESLint configuration
+✅ Application Form
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Form Status View
+
+✅ Footer
+
+✅ Application Filter
+
+🔄 Styling and Responsiveness: In Progress
+
+🚀 Features
+
+### 🌐 Navbar
+
+- Displays company logo and name
+
+- "Apply" button to scroll smoothly to the application form
+
+- Search bar for quick filtering of applications
+
+### 📄 Application Form
+
+- Captures all essential applicant details via a modern UI form:
+
+- First Name, Middle Name, Last Name
+
+- Gender (radio input)
+
+- Date of Birth (with date picker)
+
+- Email, Phone Number
+
+- Address
+
+- Education Level (Dropdown: Diploma, Degree, Masters, PhD)
+
+- Year of Graduation (Generated dynamically from current year)
+
+- Opportunity of Interest (Dropdown: e.g., Frontend Developer, Data Analyst, etc.)
+
+- Submit button posts data to local backend API
+
+### 📂 Form Status
+
+- Displays submitted application entries
+
+- Approval status labels: Pending, Accepted, Rejected
+
+- Full list of applications visible to admin
+
+### Application Filter
+
+-Filter applications based on:
+- Opportunity of interest.
+
+
+
+###  Footer
+
+-Displays:
+
+-  Company Logo
+
+- GitHub and contact links
+
+- Physical location
+
+### Copyright info
+
+- 🛠️ Tech Stack
+
+- Frontend: React.js
+
+- Styling: CSS & TailwindCSS
+
+- State Management: React state
+
+- Date Handling: react-datepicker
+
+### 📁 Folder Structure
+
+/src/components/
+├── Navbar.jsx
+├── ApplicationForm.jsx
+├── FormStatus.jsx
+├── ApplicationFilter.jsx
+├── Footer.jsx
+
+### 🤎 Getting Started
+
+To run this project locally:
+
+1. Clone the Repository
+
+(git clone https://github.com/Ogendo-star/Internship-Application-Portal.git)
+
+2. Navigate to the Project Directory
+
+cd Internship-Application-Portal
+
+3. Install Dependencies
+
+npm install
+
+4. Start the Development Server
+
+npm run dev
+
+
+
+### 🤝 Contributing
+
+-Contributions are welcome! Feel free to:
+
+- Fork this repository
+
+- Create a new branch
+
+- Make your changes
+
+- Submit a pull request
+
+### 📩 Contact
+
+Have questions or feedback?
+Reach out on GitHub: @Ogendo-star
+
+### 📝 License
+
+-This project is licensed under the MIT License.
+
+-Built with passion by Ogendo-star ✨ and collaborators.
+
