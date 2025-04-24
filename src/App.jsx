@@ -2,7 +2,6 @@ import { BrowserRouter ,Routes,Route} from 'react-router-dom';
 import React, { useState } from 'react';
 import ApplicationFilter from './components/ApplicationFilter';
 import InternshipData from './data/Internship';
-import DashBoard from './components/Dashboard';
 import "./App.css";
 
 
