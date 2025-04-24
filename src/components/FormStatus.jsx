@@ -1,86 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function FormStatus() {
-  const [age, setAge] = useState('');
-  const [description, setDescription] = useState('');
-  const [skills, setSkills] = useState([]);
-  const [cvUploaded, setCvUploaded] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [portfolioUrl, setPortfolioUrl] = useState('');
-  const [status, setStatus] = useState('');
+const FormStatus = ({ application }) => {
+  const { age, skills, cvUploaded } = application;
 
-  const requiredSkills = ['JavaScript', 'React'];
+  let status = 'Pending';
 
-  const handleSkillChange = (e) => {
-    const { value, checked } = e.target;
-    setSkills((prevSkills) =>
-      checked ? [...prevSkills, value] : prevSkills.filter((skill) => skill !== value)
-    );
-  };
+  if (!age || !skills || !cvUploaded) {
+    status = 'Rejected';
+  }
 
-  const checkStatus = () => {
-    const ageValid = parseInt(age) >= 18;
-    const descriptionValid = description.trim().length > 10;
-    const skillsValid = requiredSkills.every((skill) => skills.includes(skill));
-    const cvValid = cvUploaded;
-
-    const conditionsMet = [ageValid, descriptionValid, skillsValid, cvValid].filter(Boolean).length;
-
-    if (conditionsMet === 4) {
-      setStatus('Accepted');
-    } else if (conditionsMet === 0) {
-      setStatus('Rejected');
-    } else {
-      setStatus('Pending');
-    }
-  };
+  if (age && skills && cvUploaded) {
+    status = 'Accepted';
+  }
 
   return (
-    <div className="form-status">
-      <h1>Internship Application Form</h1>
+    <div>
+      <h2>Application Status</h2>
+      <p>Status: <strong>{status}</strong></p>
 
-      <label>
-        Age (18+):
-        <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
-      </label>
-
-      <label>
-        Description (10+ characters):
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-      </label>
-
-      <fieldset>
-        <legend>Skills (Required: JavaScript, React)</legend>
-        <label><input type="checkbox" value="JavaScript" onChange={handleSkillChange} /> JavaScript</label>
-        <label><input type="checkbox" value="React" onChange={handleSkillChange} /> React</label>
-        <label><input type="checkbox" value="HTML" onChange={handleSkillChange} /> HTML</label>
-        <label><input type="checkbox" value="CSS" onChange={handleSkillChange} /> CSS</label>
-      </fieldset>
-
-      <label>
-        Phone Number:
-        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-      </label>
-
-      <label>
-        Portfolio URL:
-        <input type="url" value={portfolioUrl} onChange={(e) => setPortfolioUrl(e.target.value)} />
-      </label>
-
-      <label>
-        Upload CV:
-        <input type="file" onChange={(e) => setCvUploaded(e.target.files.length > 0)} />
-      </label>
-
-      <button onClick={checkStatus}>Check Status</button>
-
-      {status && (
-        <div>
-          <h2>Application Status: {status}</h2>
-        </div>
-      )}
+      <h3>Application Details</h3>
+      <ul>
+        <li>Age: {age ?  : }</li>
+        <li>Skills: {skills ?  :}</li>
+        <li>CV Uploaded: {cvUploaded ?  : }</li>
+      </ul>
     </div>
   );
-}
+};
 
 export default FormStatus;
