@@ -4,8 +4,8 @@ function DashBoard() {
   const [isOpen, setIsOpen] = useState(true);
 
   const sidebarStyle = {
-    width: isOpen ? "220px" : "50px",
-    height: "100vh",
+    width: isOpen ? "250px" : "50px",
+    height: "1000px",
     backgroundColor: "gray",
     color: "white",
     padding: isOpen ? "22px" : "0",
@@ -13,7 +13,6 @@ function DashBoard() {
     position: "fixed",
     transition: "0.3s",
     whiteSpace: "nowrap",
-    borderRadius:"8px",
   };
 
   const linkStyle = {
@@ -35,7 +34,8 @@ function DashBoard() {
     background: "none",
     border: "none",
     color: "white",
-    marginTop:isOpen?"495px":"830px",
+    marginLeft:"10px",
+    marginTop:isOpen?"495px":"840px",
     
   };
   const companyLogo={
@@ -52,7 +52,7 @@ function DashBoard() {
   return (
       <div style={sidebarStyle}>
         <div>
-      <img src="src/assets/logo.jpg" alt="company logo" style={companyLogo}/>
+      <img src="src/components/assets/logo.jpg" alt="company logo" style={companyLogo}/>
         {isOpen && (
           <>
             {isOpen && <h2 style={{ textAlign: "center", width: "100%" }}>Intern Dashboard</h2>}
