@@ -1,4 +1,5 @@
-[
+{
+  "internships": [
     {
       "id": 1,
       "opportunity": "Frontend Development",
@@ -80,4 +81,4 @@
       "type": "Remote"
     }
   ]
-  
+}
