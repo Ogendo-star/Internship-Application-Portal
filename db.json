@@ -1,0 +1,98 @@
+{
+  "internships": [
+    {
+      "id": "1",
+      "opportunity": "Frontend Development",
+      "company": "TechNova Solutions",
+      "location": "Remote",
+      "description": "Assist in building responsive React components using Tailwind CSS.",
+      "type": "Remote"
+    },
+    {
+      "id": "2",
+      "opportunity": "Data Analysis",
+      "company": "Insight Analytics",
+      "location": "Remote",
+      "description": "Analyze user data and create dashboards using Python and Excel.",
+      "type": "Remote"
+    },
+    {
+      "id": "3",
+      "opportunity": "UI/UX Design",
+      "company": "Creative Minds Inc.",
+      "location": "Kisumu, Kenya",
+      "description": "Design wireframes and mockups for mobile and web apps.",
+      "type": "On-site"
+    },
+    {
+      "id": "4",
+      "opportunity": "Digital Marketing",
+      "company": "Social Boosters",
+      "location": "Lagos, Nigeria",
+      "description": "Create and manage campaigns across social media platforms.",
+      "type": "On-site"
+    },
+    {
+      "id": "5",
+      "opportunity": "Backend Development",
+      "company": "CodeBrew Labs",
+      "location": "San Francisco, CA",
+      "description": "Work with Node.js and Express to develop REST APIs.",
+      "type": "Hybrid"
+    },
+    {
+      "id": "6",
+      "opportunity": "Content Writing",
+      "company": "WordWizards",
+      "location": "London, UK",
+      "description": "Write blog posts, newsletters, and website content for various industries.",
+      "type": "Hybrid"
+    },
+    {
+      "id": "7",
+      "opportunity": "Cloud Engineering",
+      "company": "SkyStack Tech",
+      "location": "Mombasa, Kenya",
+      "description": "Assist in deploying cloud infrastructure using AWS.",
+      "type": "On-site"
+    },
+    {
+      "id": "8",
+      "opportunity": "Graphic Design",
+      "company": "PixelForge",
+      "location": "Remote",
+      "description": "Design promotional materials and visual assets for campaigns.",
+      "type": "Remote"
+    },
+    {
+      "id": "9",
+      "opportunity": "Project Management",
+      "company": "LaunchHub",
+      "location": "Nairobi, Kenya",
+      "description": "Collaborate with teams to refine product features and strategies.",
+      "type": "Hybrid"
+    },
+    {
+      "id": "10",
+      "opportunity": "Mobile App Development",
+      "company": "Appify Studio",
+      "location": "Remote",
+      "description": "Support the development of cross-platform mobile apps using Flutter.",
+      "type": "Remote"
+    },
+    {
+      "id": "f500",
+      "firstName": "Masela",
+      "middleName": "Ogendo",
+      "lastName": "Puro",
+      "email": "puroselah@gmail.com",
+      "phone": "0700290937",
+      "dob": "2015-03-01T21:00:00.000Z",
+      "yearOfGraduation": "2020",
+      "opportunityOfInterest": "Frontend Developer",
+      "educationLevel": "Diploma",
+      "address": "Nairobi,Kenya",
+      "gender": "Female"
+    }
+  ]
+}
