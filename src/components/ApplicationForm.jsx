@@ -38,37 +38,37 @@ const generateYears = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-
-    fetch('http://localhost:3000/internships', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
+  
+    const defaultStatus = "Pending"; 
+  
+    fetch('http://localhost:3000/applications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...user, status: defaultStatus }),
     })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data) 
-       console.log(user); 
-    
-   
-setUser({
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      dob: '',
-      yearOfGraduation: '',
-      opportunityOfInterest: '',
-      educationLevel: '',
-      address: '',
-      gender: ''
-    });
-        })
-    
-}
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(user);
+  
+        setUser({
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          dob: '',
+          yearOfGraduation: '',
+          opportunityOfInterest: '',
+          educationLevel: '',
+          address: '',
+          gender: ''
+        });
+      });
+  };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
@@ -115,17 +115,34 @@ setUser({
             onChange={handleChange}
             required
           />
-          <input
-            name="phone"
-            type="tel"
-            placeholder="Phone Number"
-            className="border p-2 rounded"
-            value={user.phoneNumber}
-            onChange={handleChange}
-            required
-          />
-        
-            
+          <div className="col-span-2">
+  <label className="block mb-1">Phone Number</label>
+  <div className="flex">
+    <select
+      className="border p-2 rounded-l"
+      onChange={(e) =>
+        setUser((prev) => ({
+          ...prev,
+          phone: e.target.value + prev.phone.replace(/^\+\d+/, '')
+        }))
+      }
+    >
+      <option value="+254">+254 (KE)</option>
+      <option value="+1">+1 (US)</option>
+      <option value="+44">+44 (UK)</option>
+    </select>
+    <input
+      name="phone"
+      type="tel"
+      placeholder="Phone Number"
+      className="border p-2 rounded-r w-full"
+      value={user.phone}
+      onChange={handleChange}
+      required
+    />
+  </div>
+</div>
+
             <DatePicker
               selected={user.dob}
               onChange={(date) =>
@@ -220,26 +237,34 @@ setUser({
             <option value="Masters">Masters</option>
             <option value="PhD">PhD</option>
           </select>
-          <input
-            name="address"
-            type="text"
-            placeholder="Address"
-            className="border p-2 rounded"
-            value={user.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full mt-6 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-          Submit
-        </button>
+          <select
+  name="address"
+  className="border p-2 rounded"
+  value={user.address}
+  onChange={handleChange}
+  required
+>
+  <option value="">Select Address</option>
+  <option value="Kakamega">Kakamega</option>
+  <option value="Nakuru">Nakuru</option>
+  <option value="Mombasa">Mombasa</option>
+  <option value="Kitale">Kitale</option>
+  <option value="Nairobi">Nairobi</option>
+  <option value="Kisumu">Kisumu</option>
+  </select>
+  
+  </div>
+  <button
+   type="submit"
+   className="w-full mt-6 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+   >
+    Submit
+  </button>
       </form>
     </div>
   );
 };
 
 export default  ApplicationForm;
+        
+            

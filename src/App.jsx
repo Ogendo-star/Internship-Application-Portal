@@ -9,11 +9,15 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
-import "./pagination.css"; 
+import './pagination.css';
 
+const ROUTES = {
+  HOME: '/',
+  APPLY: '/apply',
+  STATUS: '/apply-with-filter',
+};
 
-
-function App(){
+function App() {
   const [internships, setInternships] = useState([]);
   const [opportunityFilter, setOpportunityFilter] = useState('All');
   const [companyFilter, setCompanyFilter] = useState('All');
@@ -43,10 +47,10 @@ function App(){
     fetchInternships();
   }, []);
 
-  const uniqueCompanies = [...new Set(internships.map(item => item.company))];
-  const uniqueLocations = [...new Set(internships.map(item => item.location))];
+  const uniqueCompanies = [...new Set(internships.map((item) => item.company))];
+  const uniqueLocations = [...new Set(internships.map((item) => item.location))];
 
-  const filteredInternships = internships.filter(item =>
+  const filteredInternships = internships.filter((item) =>
     (opportunityFilter === 'All' || item.opportunity === opportunityFilter) &&
     (companyFilter === 'All' || item.company === companyFilter) &&
     (locationFilter === 'All' || item.location === locationFilter)
@@ -74,17 +78,21 @@ function App(){
     const path = location.pathname;
 
     useEffect(() => {
-      if (path !== '/apply') setSelectedInternship(null);
+      if (path !== ROUTES.APPLY) setSelectedInternship(null);
     }, [path]);
 
-    if (loading) return <div className="text-center py-10">Loading internships...</div>;
-    if (error) return <div className="text-center py-10 text-red-600">{error}</div>;
+    if (loading) return <div className="flex justify-center items-center h-60 text-blue-700 text-xl">Loading internships...</div>;
+if (error) return <div className="flex justify-center items-center h-60 text-red-600 text-lg">{error}</div>;
+
 
     switch (path) {
-      case '/':
+      case ROUTES.HOME:
         return (
           <>
-            <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">Available Internships</h1>
+            <h1 className="text-3xl font-bold text-center mb-6" style={{ color: '#001f3f' }}>
+  Available Internships
+</h1>
+
             <ApplicationFilter
               onOpportunityFilterChange={setOpportunityFilter}
               onCompanyFilterChange={setCompanyFilter}
@@ -102,13 +110,14 @@ function App(){
                   <p className="text-gray-500 mt-2 text-sm">Description: {item.description}</p>
                   <p className="text-gray-500 mt-2 text-sm">Type: {item.type}</p>
                   <div className="mt-4">
-                    <NavLink
-                      to="/apply"
-                      className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                      onClick={() => handleInternshipSelect(item)}
-                    >
-                      Apply Now
-                    </NavLink>
+                  <NavLink
+                  to="/apply"
+                  className="inline-block px-4 py-2 bg-[#001f3f] text-white rounded hover:bg-blue-800 transition"
+                  onClick={() => handleInternshipSelect(item)}
+                  >
+                    Apply Now
+                  </NavLink>
+                  
                   </div>
                 </div>
               ))}
@@ -119,28 +128,28 @@ function App(){
             </div>
 
             {pageCount > 1 && (
-              <div className="pagination-container mt-6">
+              <div className="flex justify-center mt-6">
                 <ReactPaginate
-                  previousLabel={"← Previous"}
-                  nextLabel={"Next →"}
+                  previousLabel={'← Previous'}
+                  nextLabel={'Next →'}
                   pageCount={pageCount}
                   onPageChange={handlePageClick}
-                  containerClassName={"pagination"}
-                  previousLinkClassName={"pagination__link"}
-                  nextLinkClassName={"pagination__link"}
-                  disabledClassName={"pagination__link--disabled"}
-                  activeClassName={"pagination__link--active"}
+                  containerClassName={'pagination'}
+                  previousLinkClassName={'pagination__link'}
+                  nextLinkClassName={'pagination__link'}
+                  disabledClassName={'pagination__link--disabled'}
+                  activeClassName={'pagination__link--active'}
                 />
               </div>
             )}
           </>
         );
-      case '/apply':
+      case ROUTES.APPLY:
         return <ApplicationForm selectedInternship={selectedInternship} />;
-      case '/status':
+      case ROUTES.STATUS:
         return <FormStatus internships={internships} />;
       default:
-        return <div className="text-center py-10">Page not found</div>;
+        return <div className="text-center py-10 text-lg">Page not found</div>;
     }
   };
 
@@ -155,10 +164,9 @@ function App(){
           </Routes>
         </main>
         <Footer />
-      
       </div>
     </Router>
   );
-};
+}
 
 export default App;
