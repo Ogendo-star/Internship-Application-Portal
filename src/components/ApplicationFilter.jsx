@@ -1,25 +1,24 @@
 import React from 'react';
 
-const ApplicationFilter = ({ 
-  onOpportunityFilterChange, 
-  onCompanyFilterChange, 
+const ApplicationFilter = ({
+  onOpportunityFilterChange,
+  onCompanyFilterChange,
   onLocationFilterChange,
   companies,
   locations
 }) => {
   return (
-    <div className="bg-white shadow-md rounded p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-      
-      <div>
-        <label htmlFor="opportunity" className="block text-sm font-medium text-gray-700 mb-2">
-        By Opportunity
-        </label>
-        <select
-          id="opportunity"
-          onChange={(e) => onOpportunityFilterChange(e.target.value)}
-          className="w-full border border-gray-300 rounded p-2"
-        >
-          <option value="All">All Opportunities</option>
+    <div className="bg-white shadow-md rounded-lg p-4 border border-blue-200 mb-6">
+      <h3 className="text-lg font-semibold text-blue-800 mb-4">Filter Internships</h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Opportunity</label>
+          <select
+            onChange={(e) => onOpportunityFilterChange(e.target.value)}
+            className="block w-full border border-blue-300 rounded-md px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          >
+           <option value="All">All Opportunities</option>
           <option value="Frontend Development">Frontend Developer</option>
           <option value="Data Analysis">Data Analysis</option>
           <option value="UI/UX Design">UI/UX Design</option>
@@ -31,40 +30,33 @@ const ApplicationFilter = ({
           <option value="Project Management">Project Management</option>
           <option value="Mobile App Development">Mobile App Development</option>
         </select>
-      </div>
+        </div>
 
-      
-      <div>
-        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-        By Company
-        </label>
-        <select
-          id="company"
-          onChange={(e) => onCompanyFilterChange(e.target.value)}
-          className="w-full border border-gray-300 rounded p-2"
-        >
-          <option value="All">All Companies</option>
-          {companies && companies.map((company, index) => (
-            <option key={index} value={company}>{company}</option>
-          ))}
-        </select>
-      </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+          <select
+            onChange={(e) => onCompanyFilterChange(e.target.value)}
+            className="block w-full border border-blue-300 rounded-md px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          >
+            <option value="All">All</option>
+            {companies.map((company, idx) => (
+              <option key={idx} value={company}>{company}</option>
+            ))}
+          </select>
+        </div>
 
-    
-      <div>
-        <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
-        By Location
-        </label>
-        <select
-          id="location"
-          onChange={(e) => onLocationFilterChange(e.target.value)}
-          className="w-full border border-gray-300 rounded p-2"
-        >
-          <option value="All">All Locations</option>
-          {locations && locations.map((location, index) => (
-            <option key={index} value={location}>{location}</option>
-          ))}
-        </select>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+          <select
+            onChange={(e) => onLocationFilterChange(e.target.value)}
+            className="block w-full border border-blue-300 rounded-md px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          >
+            <option value="All">All</option>
+            {locations.map((location, idx) => (
+              <option key={idx} value={location}>{location}</option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
   );

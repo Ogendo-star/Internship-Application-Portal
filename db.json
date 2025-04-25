@@ -79,20 +79,6 @@
       "location": "Remote",
       "description": "Support the development of cross-platform mobile apps using Flutter.",
       "type": "Remote"
-    },
-    {
-      "id": "f500",
-      "firstName": "Masela",
-      "middleName": "Ogendo",
-      "lastName": "Puro",
-      "email": "puroselah@gmail.com",
-      "phone": "0700290937",
-      "dob": "2015-03-01T21:00:00.000Z",
-      "yearOfGraduation": "2020",
-      "opportunityOfInterest": "Frontend Developer",
-      "educationLevel": "Diploma",
-      "address": "Nairobi,Kenya",
-      "gender": "Female"
     }
   ]
 }
