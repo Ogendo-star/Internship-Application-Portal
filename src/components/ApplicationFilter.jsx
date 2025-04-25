@@ -12,7 +12,7 @@ const ApplicationFilter = ({
       
       <div>
         <label htmlFor="opportunity" className="block text-sm font-medium text-gray-700 mb-2">
-          Filter by Opportunity
+        By Opportunity
         </label>
         <select
           id="opportunity"
@@ -36,7 +36,7 @@ const ApplicationFilter = ({
       
       <div>
         <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-          Filter by Company
+        By Company
         </label>
         <select
           id="company"
@@ -53,7 +53,7 @@ const ApplicationFilter = ({
     
       <div>
         <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
-          Filter by Location
+        By Location
         </label>
         <select
           id="location"

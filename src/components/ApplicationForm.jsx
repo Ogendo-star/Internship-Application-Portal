@@ -4,8 +4,7 @@ import React, { useState } from 'react';
   
 
 
-  export default function AppForm() {
-
+  function ApplicationForm(){
 const generateYears = () => {
   const currentYear = new Date().getFullYear();
   const years = [];
@@ -41,7 +40,7 @@ const generateYears = () => {
     event.preventDefault();
 
 
-    fetch('http://localhost:3001/internships', {
+    fetch('http://localhost:3000/internships', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +52,7 @@ const generateYears = () => {
             console.log(data) 
        console.log(user); 
     
-    //clear/rest the form
+   
 setUser({
       firstName: '',
       middleName: '',
@@ -243,4 +242,4 @@ setUser({
   );
 };
 
-
+export default  ApplicationForm;
