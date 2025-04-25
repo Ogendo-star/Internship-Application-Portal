@@ -12,6 +12,7 @@ import ReactPaginate from 'react-paginate';
 import "./pagination.css"; 
 
 
+
 function App(){
   const [internships, setInternships] = useState([]);
   const [opportunityFilter, setOpportunityFilter] = useState('All');
@@ -154,6 +155,7 @@ function App(){
           </Routes>
         </main>
         <Footer />
+      
       </div>
     </Router>
   );
