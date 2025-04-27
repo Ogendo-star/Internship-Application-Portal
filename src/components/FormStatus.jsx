@@ -1,105 +1,58 @@
-import React, { useState } from "react";
-
-// Skills options for dropdown
-const skillsOptions = [
-  "JavaScript",
-  "React",
-  "Node.js",
-  "Python",
-  "Java",
-  "SQL",
-  "HTML/CSS",
-  "Machine Learning",
-  "Git/GitHub",
-  "Django"
-];
+import React, { useEffect, useState } from "react";
 
 const FormStatus = () => {
-  const [age, setAge] = useState("");
-  const [skills, setSkills] = useState([]);
-  const [cvUploaded, setCvUploaded] = useState(false);
-  const [whyChooseUs, setWhyChooseUs] = useState("");
-  const [status, setStatus] = useState("");
+  const [applications, setApplications] = useState([]);
 
-  // Handle skill selection
-  const handleSkillsChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setSkills((prevSkills) => [...prevSkills, value]);
-    } else {
-      setSkills((prevSkills) => prevSkills.filter((skill) => skill !== value));
-    }
-  };
-
-  // Check if conditions are met
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let newStatus = "Rejected"; // Default status
-
-    if (age >= 18 && skills.length >= 3 && cvUploaded && whyChooseUs.trim()) {
-      newStatus = "Accepted";
-    } else if (age >= 18 && skills.length >= 1 && cvUploaded) {
-      newStatus = "Pending";
-    }
-
-    setStatus(newStatus);
-  };
+  useEffect(() => {
+    fetch("http://localhost:3000/internships")
+      .then((res) => res.json())
+      .then((data) => setApplications(data))
+      .catch((error) => console.error("Error fetching applications:", error));
+  }, []);
 
   return (
-    <div className="form-status">
-      <h2>Internship Application Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="age">Age:</label>
-          <input
-            type="number"
-            id="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            required
-            placeholder="Enter your age"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Skills:</label>
-          {skillsOptions.map((skill, index) => (
-            <div key={index}>
-              <input
-                type="checkbox"
-                value={skill}
-                onChange={handleSkillsChange}
-              />
-              <label>{skill}</label>
-            </div>
-          ))}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="cv-upload">Upload CV:</label>
-          <input
-            type="file"
-            id="cv-upload"
-            onChange={(e) => setCvUploaded(e.target.files.length > 0)}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="why-choose-us">Why Choose Us:</label>
-          <textarea
-            id="why-choose-us"
-            value={whyChooseUs}
-            onChange={(e) => setWhyChooseUs(e.target.value)}
-            required
-            placeholder="Why do you want to work with us?"
-          />
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
-
-      {status && <h3>Status: {status}</h3>}
+    <div className="p-6 bg-white rounded-lg shadow-md max-w-4xl mx-auto mt-10">
+      <h2 className="text-2xl font-bold text-sky-900 mb-4 text-center">Submitted Applications</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto border border-cyan-400">
+          <thead className="bg-cyan-100 text-sky-900">
+            <tr>
+              <th className="px-4 py-2 border">Name</th>
+              <th className="px-4 py-2 border">Email</th>
+              <th className="px-4 py-2 border">Opportunity</th>
+              <th className="px-4 py-2 border">Location</th>
+              <th className="px-4 py-2 border">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {applications.length > 0 ? (
+              applications.map((app, index) => (
+                <tr key={index} className="text-center">
+                  <td className="border px-4 py-2">{app.firstName} {app.lastName}</td>
+                  <td className="border px-4 py-2">{app.email}</td>
+                  <td className="border px-4 py-2">{app.opportunityOfInterest}</td>
+                  <td className="border px-4 py-2">{app.address}</td>
+                  <td className="border px-4 py-2 text-white">
+                    <span className={`px-2 py-1 rounded text-sm ${
+                      app.status === "Accepted"
+                        ? "bg-green-500"
+                        : app.status === "Rejected"
+                        ? "bg-red-500"
+                        : "bg-yellow-500"
+                    }`}>
+                      {app.status || "pending"}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center py-4 text-gray-500">No applications found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
