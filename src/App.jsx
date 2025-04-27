@@ -27,7 +27,7 @@ function App() {
   const [selectedInternship, setSelectedInternship] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const itemsPerPage = 4;
+  const itemsPerPage = 2;
 
   useEffect(() => {
     const fetchInternships = async () => {
@@ -47,16 +47,35 @@ function App() {
     fetchInternships();
   }, []);
 
+  const onOpportunityFilterChange = (selectedValue) => {
+    setOpportunityFilter(selectedValue);
+  };
+
+  const onCompanyFilterChange = (selectedValue) => {
+    setCompanyFilter(selectedValue);
+  };
+
+  const onLocationFilterChange = (selectedValue) => {
+    setLocationFilter(selectedValue);
+  };
+
   const uniqueCompanies = [...new Set(internships.map((item) => item.company))];
   const uniqueLocations = [...new Set(internships.map((item) => item.location))];
 
   const filteredInternships = internships.filter((item) =>
-    (opportunityFilter === 'All' || item.opportunity === opportunityFilter) &&
-    (companyFilter === 'All' || item.company === companyFilter) &&
-    (locationFilter === 'All' || item.location === locationFilter)
+    (opportunityFilter === 'All' || item.opportunity.trim().toLowerCase() === opportunityFilter.trim().toLowerCase()) &&
+    (companyFilter === 'All' || item.company.trim().toLowerCase() === companyFilter.trim().toLowerCase()) &&
+    (locationFilter === 'All' || item.location.trim().toLowerCase() === locationFilter.trim().toLowerCase())
   );
+  
+  const pageCount = Math.max(1, Math.ceil(filteredInternships.length / itemsPerPage));
 
-  const pageCount = Math.ceil(filteredInternships.length / itemsPerPage);
+  useEffect(() => {
+    if (currentPage >= pageCount) {
+      setCurrentPage(pageCount - 1);
+    }
+  }, [pageCount]);
+
   const offset = currentPage * itemsPerPage;
   const currentInternships = filteredInternships.slice(offset, offset + itemsPerPage);
 
@@ -78,12 +97,11 @@ function App() {
     const path = location.pathname;
 
     useEffect(() => {
-      if (path !== ROUTES.APPLY) setSelectedInternship(null);
+      if (path !== ROUTES.APPLY) setSelectedInternship("All");
     }, [path]);
 
     if (loading) return <div className="flex justify-center items-center h-60 text-blue-700 text-xl">Loading internships...</div>;
 if (error) return <div className="flex justify-center items-center h-60 text-red-600 text-lg">{error}</div>;
-
 
     switch (path) {
       case ROUTES.HOME:
@@ -94,9 +112,9 @@ if (error) return <div className="flex justify-center items-center h-60 text-red
 </h1>
 
             <ApplicationFilter
-              onOpportunityFilterChange={setOpportunityFilter}
-              onCompanyFilterChange={setCompanyFilter}
-              onLocationFilterChange={setLocationFilter}
+              onOpportunityFilterChange={onOpportunityFilterChange}
+              onCompanyFilterChange={onCompanyFilterChange}
+              onLocationFilterChange={onLocationFilterChange}
               companies={uniqueCompanies}
               locations={uniqueLocations}
             />
@@ -117,8 +135,7 @@ if (error) return <div className="flex justify-center items-center h-60 text-red
                   >
                     Apply Now
                   </NavLink>
-                  
-                  </div>
+                                    </div>
                 </div>
               ))}
 
@@ -127,8 +144,8 @@ if (error) return <div className="flex justify-center items-center h-60 text-red
               )}
             </div>
 
-            {pageCount > 1 && (
-              <div className="flex justify-center mt-6">
+            {filteredInternships.length > 0 && pageCount > 1 && (
+              <div className="flex justify-center mt-4">
                 <ReactPaginate
                   previousLabel={'← Previous'}
                   nextLabel={'Next →'}

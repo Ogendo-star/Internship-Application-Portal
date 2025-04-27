@@ -148,7 +148,7 @@ function ApplicationForm() {
           
           <select name="opportunityOfInterest" className="border p-2 rounded" value={user.opportunityOfInterest} onChange={handleChange} required>
             <option value="">Opportunity of Interest</option>
-            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Frontend Development">Frontend Development</option>
             <option value="Data Analysis">Data Analyst</option>
             <option value="UI/UX Design">UI/UX Design</option>
             <option value="Digital Marketing">Digital Marketing</option>
