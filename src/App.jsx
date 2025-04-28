@@ -8,8 +8,7 @@ import FormStatus from './components/FormStatus';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactPaginate from 'react-paginate';
-import './pagination.css';
+
 
 const ROUTES = {
   HOME: '/',
@@ -25,9 +24,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedInternship, setSelectedInternship] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const itemsPerPage = 2;
+  const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
     const fetchInternships = async () => {
@@ -48,40 +45,29 @@ function App() {
   }, []);
 
   const onOpportunityFilterChange = (selectedValue) => {
-    setOpportunityFilter(selectedValue);
+    setOpportunityFilter(selectedValue);  
   };
-
+  
   const onCompanyFilterChange = (selectedValue) => {
-    setCompanyFilter(selectedValue);
+    setCompanyFilter(selectedValue);  
   };
-
+  
   const onLocationFilterChange = (selectedValue) => {
-    setLocationFilter(selectedValue);
+    setLocationFilter(selectedValue);  
   };
 
   const uniqueCompanies = [...new Set(internships.map((item) => item.company))];
   const uniqueLocations = [...new Set(internships.map((item) => item.location))];
 
-  const filteredInternships = internships.filter((item) =>
-    (opportunityFilter === 'All' || item.opportunity.trim().toLowerCase() === opportunityFilter.trim().toLowerCase()) &&
-    (companyFilter === 'All' || item.company.trim().toLowerCase() === companyFilter.trim().toLowerCase()) &&
-    (locationFilter === 'All' || item.location.trim().toLowerCase() === locationFilter.trim().toLowerCase())
-  );
-  
-  const pageCount = Math.max(1, Math.ceil(filteredInternships.length / itemsPerPage));
+  const filteredInternships = internships.filter((item) => {
+    const isOpportunityMatch = opportunityFilter === 'All' || item.opportunity.toLowerCase().includes(opportunityFilter.toLowerCase());
+    const isCompanyMatch = companyFilter === 'All' || item.company.toLowerCase().includes(companyFilter.toLowerCase());
+    const isLocationMatch = locationFilter === 'All' || item.location.toLowerCase().includes(locationFilter.toLowerCase());
+    
+    return isOpportunityMatch && isCompanyMatch && isLocationMatch;
+  });
 
-  useEffect(() => {
-    if (currentPage >= pageCount) {
-      setCurrentPage(pageCount - 1);
-    }
-  }, [pageCount]);
-
-  const offset = currentPage * itemsPerPage;
-  const currentInternships = filteredInternships.slice(offset, offset + itemsPerPage);
-
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
+  const currentInternships = filteredInternships.slice(0, visibleCount);
 
   const handleInternshipSelect = (internship) => {
     setSelectedInternship(internship);
@@ -89,8 +75,9 @@ function App() {
   };
 
   useEffect(() => {
-    setCurrentPage(0);
-  }, [opportunityFilter, companyFilter, locationFilter]);
+    setVisibleCount(4);
+  }, [opportunityFilter, companyFilter, locationFilter]
+);
 
   const MainContent = () => {
     const location = useLocation();
@@ -144,21 +131,16 @@ if (error) return <div className="flex justify-center items-center h-60 text-red
               )}
             </div>
 
-            {filteredInternships.length > 0 && pageCount > 1 && (
-              <div className="flex justify-center mt-4">
-                <ReactPaginate
-                  previousLabel={'← Previous'}
-                  nextLabel={'Next →'}
-                  pageCount={pageCount}
-                  onPageChange={handlePageClick}
-                  containerClassName={'pagination'}
-                  previousLinkClassName={'pagination__link'}
-                  nextLinkClassName={'pagination__link'}
-                  disabledClassName={'pagination__link--disabled'}
-                  activeClassName={'pagination__link--active'}
-                />
-              </div>
-            )}
+            {filteredInternships.length > visibleCount && (
+  <div className="flex justify-center mt-4">
+    <button
+      className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-900 transition"
+      onClick={() => setVisibleCount((prev) => prev + 4)}
+    >
+      Load More
+    </button>
+  </div>
+)}
           </>
         );
       case ROUTES.APPLY:
